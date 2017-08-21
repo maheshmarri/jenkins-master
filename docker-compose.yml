@@ -3,7 +3,7 @@ master:
   dockerfile: Dockerfile-alpine
   environment:
     DOCKER_TLS_VERIFY: "1"
-    DOCKER_HOST: "tcp://nssrvbmwdevops03:2376"
+    DOCKER_HOST: "tcp://xxxxxxxxxx:2376"
     DOCKER_CERT_PATH: "/et/docker/"
     JAVA_OPTS: "-Djava.awt.headless=true"
     JENKINS_OPTS: "--logfile=/var/log/jenkins.log -Djenkins.slaves.DefaultJnlpSlaveReceiver.disableStrictVerification=true"
