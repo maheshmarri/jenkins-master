@@ -1,0 +1,16 @@
+master:
+  build: .
+  dockerfile: Dockerfile-alpine
+  environment:
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_HOST: "tcp://nssrvbmwdevops03:2376"
+    DOCKER_CERT_PATH: "/et/docker/"
+    JAVA_OPTS: "-Djava.awt.headless=true"
+    JENKINS_OPTS: "--logfile=/var/log/jenkins.log -Djenkins.slaves.DefaultJnlpSlaveReceiver.disableStrictVerification=true"
+    
+  ports:
+    - "50000:50000"
+    - "28080:8080"
+  volumes:
+    - /jenkins_data:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock

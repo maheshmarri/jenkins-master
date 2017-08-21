@@ -1,0 +1,50 @@
+# build image
+docker build -t jmaster .
+
+#RUN docker container
+docker run -d -p 28080:8080 -v /jenkins_data:/var/jenkins_home --name master jmaster
+
+
+#tail logs from running container
+docker exec master tail -f /var/log/jenkins/jenkins.log
+
+docker exec master less  /var/log/jenkins/jenkins.log
+
+docker exec 362474ebc9b9 tail -f /var/log/jenkins.log
+
+#RETRIEVE LOGS IF JENKINS CRASHES
+docker stop jenkinsmaster
+docker cp jenkinsmaster:/var/log/jenkins/jenkins.log jenkins.log
+
+# ssh setup for the jenkins slave. authrized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2/9o4gYIe+EC7nfYN9lnt4cUm4cbfxXJLIUEhlAzFcPrFCu4JLatJeFA74p3kN7+GMWf2MtyGyB2O4I8bdzDp2vK9AfCrD8RCjEpb0QH/ngyFzm7M4aL4UtBIcxn0kOQAzFYHaOH8vysIdW8AzmTApRD4wDqw39KsI5XPCGYlH5n8o7v6U4WDa0W7L87qE2pFmdvCbqk1Dx+pNjVkd22NiffaKNZlapunjPZYe9Csgo64b63lanwWU4GcY3VdiIhh46lMIAFH/4fUUo9dw/FRR1WCZLTUEt7+sBqKJNtTMMxlXpqO9t62wGMxw7xXFOgwTYgtS/kLTj5OJ+8CKAKN jenkins@f17287f64eb0
+
+# Private Key for Jenkins master to authenticate with jenkins slave 
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAtv/aOIGCHvhAu532DfZZ7eHFJuHG38VySyFBIZQMxXD6xQru
+CS2rSXhQO+Kd5De/hjFn9jLchsgdjuCPG3cw6dryvQHwqw/EQoxKW9EB/54Mhc5u
+zOGi+FLQSHMZ9JDkAMxWB2jh/L8rCHVvAM5kwKUQ+MA6sN/SrCOVzwhmJR+Z/KO7
++lOFg2tFuy/O6hNqRZnbwm6pNQ8fqTY1ZHdtjYn32ijWZWqbp4z2WHvQrIKOuG+t
+5Wp8FlOBnGN1XYiIYeOpTCABR/+H1FKPXcPxUUdVgmS01BLe/rAaiiTbUzDMZV6a
+jvbetsBjMcO8VxToME2ILUv5C04+TifvAigCjQIDAQABAoIBACP0KJ+pcjM7exxh
+cJJVsF14Wg/FlBkq5cW1BuLd/5RbGinUd+f9vQV2Se06HONVwJ9Q3agVXhZtAsGr
+hPJUfJu1lLNlyi8RrfGVNpbLfaUHHFa9tC80tZwsSRey5YqTXPh7LPvPs3bA6GeF
+CwYRhuICjE8TFXTixLVlWG2QrODl+w5dvQtF3mznY6E+DhxryKQGwMGEt2bCsKOe
+vMnlYvYF6ewqr22hJApeBIn1KRKRX2tLQtqf1Y8s0j7RiWVsJ5nGEvYZShXnqEg+
+NyzFwMvNLjrGvg8JNeCbUUftgslMVHnYJ2CSqtL1g9ZH4m4EMVRmrM4FyZTEJaCo
+lKYvmNECgYEA7/OEaVO6zXyM5joGofxNZF0Tgk8xvUJUFbZX5VJqJRfN5AFVW+LG
+rxptKj2sAndQnwryb/aU9MRNMKAodgF0IovM+mwlFjzaCbbhNwcgrh1E66i3ZtGj
+sfd7aq22HmAkiHCDDXE9rkO9WrZtBvx0OvdzCIwbHTx4WtRD7AQBXhcCgYEAwz0y
+gDM5LBURa1d0a/HzaY93OTxp/uLc7f0Pc+zKJQCSpQX8XSiGJb3VdeWnQ/5uatpe
+gGF1saYeJX2gZCRhHy1geGUazhyHRLKqsjmXdhHupnOLQA6Jez9UJHa9k2FKgB2k
+kr+FlnN7dlBR19TPSv5SKfbeyzckQWHorYZgjvsCgYEAtHoX9NTaYyY0IBIy3PGV
+EFEFlHSWd8CE2BPfRofXeHDQFpd+KW+HezrIMwZR80Tk6crlEJuJ7BQd7t33sNJl
+FHrMQOrIdlJsuPPJr4b36J3xMcMjtv0lP31iYZmoqm4r7Eeb+qda+lDPAoTFuoR1
+s8hcyGgBGNtbtw2CzOkyUh8CgYEAjKyql47Q8f9YJsTD4QdbgMLbf8UVBo+F6oC9
+QqTp3hF0mC0g8irBxa3rgWBwzeAkxR8EmnIesFrmO9Mx3xYLWMCEUxteXgZWPNyT
+e4ldpbg0AYEdY5FV5BT0VrWr0OZ4HKm/K/GNmqMo4U3sOpxepEVtBEmZrEjV+bpH
+QciiCEMCgYAUypUUVbsEkjanqM+cIae2hqr9q9H0AJDWmnsomInmZjjsp32COJlI
+kOHeHmbhNoNY3FOc9t1YkiK25f0Fon3xz9J5MLuUkZCPXCSTXrvnDy900vqi7D0a
+fyCg9PnXj7Ca/P+af0JChjb3tPAWgtIfmi4rdDSJvHaoYtgJmUFLGA==
+-----END RSA PRIVATE KEY-----
